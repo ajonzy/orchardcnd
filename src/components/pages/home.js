@@ -1,11 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 import Logo from "../../../static/assets/images/logo.png"
 import Nurse from "../../../static/assets/images/nurse-generic.png"
 import Trent from "../../../static/assets/images/trent-faculty.png"
+import Loading from "../../../static/assets/images/loading.gif"
 
 export default function Home(props) {
+    const renderClasses = () => {
+        const currentYear = new Date().getFullYear()
+
+        return Object.keys(props.classesData).length > 0
+        ? props.classesData.sort((a,b) =>`${a.month} ${a.start_date}, ${a.year}` -`${b.month} ${b.start_date}, ${b.year}`).map(classData => (
+            <div className="class-info-wrapper">
+                <div className="class-info" key={`classInfo-${classData.id}`}>
+                    <p className='info'>{classData.month} {classData.start_date}{classData.year != currentYear ? `, ${classData.year}` : null}</p>
+                    <p className={`availabliity ${30 - classData.signups > 0 ? "open" : "full"}`}>{30 - classData.signups > 0 ? "Open" : "Full"}</p>
+                </div>
+                <p>Lectures: {classData.lecture_time}</p>
+                <p>Clinicals: {classData.clinical_time}</p>
+            </div>
+        ))
+        : <img src={Loading} alt="Loading..." /> 
+    }
+
     return (
         <div className='home-wrapper page-wrapper'>
             <div className="header-wrapper">
@@ -13,7 +31,7 @@ export default function Home(props) {
                 <h3>766 South 400 East Orem, Ut. Suite 203</h3>
                 <h3>(801) 358-2102</h3>
             </div>
-            <div className="about-blocks-wrapper">
+            <div className="about-blocks-wrapper block-wrapper">
                 <div className="block block-one">
                     <div className="block-text">
                         <h2>Who Are We?</h2>
@@ -36,8 +54,17 @@ export default function Home(props) {
                     </div>
                 </div>
             </div>
-            <div className="learn-more-wrapper">
+            <div className="learn-more-wrapper block-wrapper button-wrapper">
                 <Link to="/about">Learn More</Link>
+            </div>
+            <div className="upcoming-classes-wrapper block-wrapper">
+                <h2>Upcoming Classes</h2>
+                <p>All classes are 104 hours long</p>
+                <p>A current TB test, covid vaccination card and a set of scrubs will be required for clinicals</p>
+                {renderClasses()}
+            </div>
+            <div className="register-now-wrapper block-wrapper button-wrapper">
+                <Link to="/register">Register Now</Link>
             </div>
         </div>
     )
