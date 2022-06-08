@@ -5,8 +5,24 @@ import Logo from "../../../static/assets/images/logo.png"
 import Nurse from "../../../static/assets/images/nurse-generic.png"
 import Trent from "../../../static/assets/images/trent-faculty.png"
 import Loading from "../../../static/assets/images/loading.gif"
+import NurseGroup from "../../../static/assets/images/nurse-group.jpg"
 
 export default function Home(props) {
+    const [carouselPosition, setCarouselPosition] = useState(0)
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCarouselPosition(carouselPosition + 2 < props.testimonialsData.length
+                ? carouselPosition + 1
+                : 0
+            )
+        }, 7000)
+
+        return () => {
+            clearInterval(interval)
+        }
+    })
+
     const renderClasses = () => {
         const currentYear = new Date().getFullYear()
 
@@ -22,6 +38,24 @@ export default function Home(props) {
             </div>
         ))
         : <img src={Loading} alt="Loading..." /> 
+    }
+
+    const renderTestimonials = () => {
+        return props.testimonialsData.map(testimonialData => (
+            <div className="testimonial-block" key={`testimonialInfo-${testimonialData.id}`}>
+                <div className="testimonial-info">
+                    <p className="name">{testimonialData.name},   </p>
+                    <a href="testimonialData.source">{testimonialData.source}</a>
+                </div>
+                <p className="testimonial">{testimonialData.text.replace("’", "'")}</p>
+            </div>
+        ))
+    }
+
+    const testimonialsFrameStyles = {
+        width: `calc(50% * ${props.testimonialsData.length} + 50px)`,
+        gridTemplateColumns: `repeat(${props.testimonialsData.length}, calc((100% / ${props.testimonialsData.length}) - 50px))`,
+        transform: `translateX(calc((-100% / ${props.testimonialsData.length}) * ${carouselPosition}))`
     }
 
     return (
@@ -65,6 +99,20 @@ export default function Home(props) {
             </div>
             <div className="register-now-wrapper block-wrapper button-wrapper">
                 <Link to="/register">Register Now</Link>
+            </div>
+            <div className="testimonials-wrapper">
+                <div className="testimonials-bg">
+                    <img src={NurseGroup} alt="" />
+                </div>
+                <div className="testimonials-text">
+                    <h2>Review</h2>
+                    <h1>What Our Students Are Saying About Us</h1>
+                    <div className="testimonials-blocks-wrapper">
+                        <div className="testimonials-blocks-frame" style={testimonialsFrameStyles}>
+                            {renderTestimonials()}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )

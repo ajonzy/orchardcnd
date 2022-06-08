@@ -9,14 +9,17 @@ export default class App extends Component {
     super()
 
     this.state = {
-      classesData: {}
+      data: {
+        events: [],
+        testimonials: []
+      }
     }
   }
 
   componentDidMount() {
-    fetch("https://orchardcdnapi.herokuapp.com/event/get")
+    fetch("https://orchardcdnapi.herokuapp.com/data")
     .then(response => response.json())
-    .then(data => this.setState({ classesData: data }))
+    .then(data => this.setState({ data }))
     .catch(error => console.log("Error contacting API: ", error))
   }
 
@@ -25,7 +28,7 @@ export default class App extends Component {
       <div className='app'>
         <Navbar />
         <Switch>
-          <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.classesData} />} />
+          <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.data.events} testimonialsData={this.state.data.testimonials} />} />
         </Switch>
       </div>
     );
