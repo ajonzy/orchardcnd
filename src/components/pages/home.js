@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
+import Loading from '../utils/loading'
+
 import Logo from "../../../static/assets/images/logo.png"
 import Nurse from "../../../static/assets/images/nurse-generic.png"
 import Trent from "../../../static/assets/images/trent-faculty.png"
-import Loading from "../../../static/assets/images/loading.gif"
 import NurseGroup from "../../../static/assets/images/nurse-group.jpg"
 
 export default function Home(props) {
@@ -37,19 +38,23 @@ export default function Home(props) {
                 <p>Clinicals: {classData.clinical_time}</p>
             </div>
         ))
-        : <img src={Loading} alt="Loading..." /> 
+        : <Loading message="Loading Classes" />
     }
 
     const renderTestimonials = () => {
-        return props.testimonialsData.map(testimonialData => (
-            <div className="testimonial-block" key={`testimonialInfo-${testimonialData.id}`}>
-                <div className="testimonial-info">
-                    <p className="name">{testimonialData.name},   </p>
-                    <a href="testimonialData.source">{testimonialData.source}</a>
+        return Object.keys(props.classesData).length > 0
+        ? <div className="testimonials-blocks-frame" style={testimonialsFrameStyles}>
+            {props.testimonialsData.map(testimonialData => (
+                <div className="testimonial-block" key={`testimonialInfo-${testimonialData.id}`}>
+                    <div className="testimonial-info">
+                        <p className="name">{testimonialData.name},   </p>
+                        <a href="testimonialData.source">{testimonialData.source}</a>
+                    </div>
+                    <p className="testimonial">{testimonialData.text.replaceAll(/([‘’‛❛❜])/g, "'").replaceAll(/([“”‟❝❞〝〞＂])/g, "\"")}</p>
                 </div>
-                <p className="testimonial">{testimonialData.text.replace("’", "'")}</p>
-            </div>
-        ))
+            ))}
+        </div>
+        : <Loading message="Loading Reviews" />
     }
 
     const testimonialsFrameStyles = {
@@ -108,9 +113,7 @@ export default function Home(props) {
                     <h2>Review</h2>
                     <h1>What Our Students Are Saying About Us</h1>
                     <div className="testimonials-blocks-wrapper">
-                        <div className="testimonials-blocks-frame" style={testimonialsFrameStyles}>
-                            {renderTestimonials()}
-                        </div>
+                        {renderTestimonials()}
                     </div>
                 </div>
             </div>
