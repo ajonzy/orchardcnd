@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router';
+import { AnimatedSwitch } from 'react-router-transition';
+import { Route } from 'react-router';
 
+import ScrollToTop from './utils/scrollToTop';
 import Navbar from './utils/navbar';
 import Home from "./pages/home"
 import About from './pages/about';
@@ -28,12 +30,18 @@ export default class App extends Component {
   render() {
     return (
       <div className='app'>
+        <ScrollToTop />
         <Navbar type="main"/>
         <Navbar type="dropdown"/>
-        <Switch>
+        <AnimatedSwitch
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 1 }}
+          atActive={{ opacity: 1 }}
+          className="switch-wrapper"
+        >
           <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.data.events} testimonialsData={this.state.data.testimonials} />} />
           <Route path="/about" component={About} />
-        </Switch>
+        </AnimatedSwitch>
         <Footer />
       </div>
     );
