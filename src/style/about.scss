@@ -1,0 +1,29 @@
+.about-page-wrapper {
+    p {
+        line-height: 1.5rem;
+    }
+
+    img {
+        max-width: 100%;
+    }
+    
+    .section-wrapper {
+        max-width: 932px;
+    }
+
+    .our-mission-wrapper, .class-requirements-wrapper {
+        text-align: center;
+    }
+
+    .our-mission-wrapper h2, .our-services-wrapper h2 {
+        color: $green;
+    }
+
+    .class-requirements-wrapper h2 {
+        color: $red;
+    }
+
+    .our-services-wrapper h4 {
+        color: $green;
+    }
+}

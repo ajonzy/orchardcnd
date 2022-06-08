@@ -64,13 +64,13 @@ export default function Home(props) {
     }
 
     return (
-        <div className='home-wrapper page-wrapper'>
+        <div className='home-page-wrapper page-wrapper'>
             <div className="header-wrapper">
                 <img src={Logo} alt="logo" />
                 <h3>766 South 400 East Orem, Ut. Suite 203</h3>
                 <h3>(801) 358-2102</h3>
             </div>
-            <div className="about-blocks-wrapper block-wrapper">
+            <div className="about-blocks-wrapper section-wrapper">
                 <div className="block block-one">
                     <div className="block-text">
                         <h2>Who Are We?</h2>
@@ -93,16 +93,16 @@ export default function Home(props) {
                     </div>
                 </div>
             </div>
-            <div className="learn-more-wrapper block-wrapper button-wrapper">
+            <div className="learn-more-wrapper section-wrapper button-wrapper">
                 <Link to="/about">Learn More</Link>
             </div>
-            <div className="upcoming-classes-wrapper block-wrapper">
+            <div className="upcoming-classes-wrapper section-wrapper">
                 <h2>Upcoming Classes</h2>
                 <p>All classes are 104 hours long</p>
                 <p>A current TB test, covid vaccination card and a set of scrubs will be required for clinicals</p>
                 {renderClasses()}
             </div>
-            <div className="register-now-wrapper block-wrapper button-wrapper">
+            <div className="register-now-wrapper section-wrapper button-wrapper">
                 <Link to="/register">Register Now</Link>
             </div>
             <div className="testimonials-wrapper">

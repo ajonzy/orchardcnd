@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router';
 
 import Navbar from './utils/navbar';
 import Home from "./pages/home"
+import About from './pages/about';
 import Footer from './utils/footer';
 
 export default class App extends Component {
@@ -31,6 +32,7 @@ export default class App extends Component {
         <Navbar type="dropdown"/>
         <Switch>
           <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.data.events} testimonialsData={this.state.data.testimonials} />} />
+          <Route path="/about" component={About} />
         </Switch>
         <Footer />
       </div>
