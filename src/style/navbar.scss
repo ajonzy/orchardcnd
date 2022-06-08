@@ -21,4 +21,12 @@
     a.active {
         border-bottom-color: black;
     }
+
+    &#navbar-dropdown {
+        position: fixed;
+        top: -90px;
+        opacity: 0;
+        transition: .5s ease-in;
+        z-index: 1000;
+    }
 }

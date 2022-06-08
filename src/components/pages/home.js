@@ -28,8 +28,8 @@ export default function Home(props) {
 
         return Object.keys(props.classesData).length > 0
         ? props.classesData.sort((a,b) =>`${a.month} ${a.start_date}, ${a.year}` -`${b.month} ${b.start_date}, ${b.year}`).map(classData => (
-            <div className="class-info-wrapper">
-                <div className="class-info" key={`classInfo-${classData.id}`}>
+            <div className="class-info-wrapper" key={`classInfo-${classData.id}`}>
+                <div className="class-info">
                     <p className='info'>{classData.month} {classData.start_date}{classData.year != currentYear ? `, ${classData.year}` : null}</p>
                     <p className={`availabliity ${30 - classData.signups > 0 ? "open" : "full"}`}>{30 - classData.signups > 0 ? "Open" : "Full"}</p>
                 </div>
