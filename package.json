@@ -4,11 +4,11 @@
   "description": "Basic skeleton codebase for React/Redux/Router applications.",
   "scripts": {
     "preinstall": "npm set audit false",
-    "start": "webpack-dev-server --config webpack/dev.config.js --watch",
-    "build": "cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
+    "start": "react-dotenv && webpack-dev-server --config webpack/dev.config.js --watch",
+    "build": "react-dotenv && cross-env NODE_ENV=production webpack --config webpack/prod.config.js --progress --display-error-details --color",
     "heroku-postbuild": "npm run build",
     "precommit": "eslint src",
-    "prod": "NODE_ENV=production node server.js"
+    "prod": "react-dotenv && NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -63,10 +63,13 @@
     "postcss-loader": "^2.1.6",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-dotenv": "^0.1.3",
+    "react-modal": "^3.15.1",
     "react-redux": "7.2.0",
     "react-router": "5.1.2",
     "react-router-dom": "5.1.2",
     "react-router-transition": "^2.1.0",
+    "react-square-payment-form": "^0.7.2",
     "redux": "4.0.5",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
@@ -84,5 +87,11 @@
     "babel-register": "^6.26.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "uglifyjs-webpack-plugin": "^1.2.7"
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "SQUARE_APPLICATION_ID",
+      "SQUARE_LOCATION_ID"
+    ]
   }
 }

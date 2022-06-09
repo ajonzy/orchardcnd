@@ -1,0 +1,32 @@
+.register-page-wrapper {
+    .upcoming-classes-wrapper {
+        h2 {
+            color: $red;
+        }
+
+        .class-info-wrapper {
+            box-shadow: 0px 8px 4px -4px rgba(0,0,0,.3);
+            padding: 20px 0px;
+
+            p {
+                margin: 0px 30px;
+
+                &.open {
+                    color: $green;
+                }
+
+                &.full {
+                    color: $red;
+                    width: 44.8px;
+                }
+            }
+
+            .class-info {
+                display: flex;
+                justify-content: space-between;
+                width: 932px;
+                font-weight: bold;
+            }
+        }
+    }
+}
