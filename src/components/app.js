@@ -6,6 +6,7 @@ import ScrollToTop from './utils/scrollToTop';
 import Navbar from './utils/navbar';
 import Home from "./pages/home"
 import About from './pages/about';
+import Contact from './pages/contact';
 import Footer from './utils/footer';
 
 export default class App extends Component {
@@ -41,6 +42,7 @@ export default class App extends Component {
         >
           <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.data.events} testimonialsData={this.state.data.testimonials} />} />
           <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
         </AnimatedSwitch>
         <Footer />
       </div>
