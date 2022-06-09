@@ -26,7 +26,7 @@ export default function Contact(props) {
                 <p>Contact us using any of the above methods, or fill out the form below with any questions you may have, and we'll get back to you!</p>
             </div>
             <div className="contact-form-wrapper">
-                <ContactForm />
+                <ContactForm/>
             </div>
         </div>
     )

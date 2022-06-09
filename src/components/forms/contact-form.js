@@ -1,14 +1,58 @@
 import React, { useState } from 'react'
 
+import Loading from '../utils/loading'
+
 export default function ContactForm(props) {
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [email, setEmail] = useState("")
     const [phone, setPhone] = useState("")
     const [message, setMessage] = useState("")
+    const [loading, setLoading] = useState(false)
+    const [alert, setAlert] = useState("")
+    const [error, setError] = useState(false)
 
     const handleSubmit = event => {
         event.preventDefault()
+
+        setLoading(true)
+        setAlert("")
+        setError(false)
+
+        fetch("https://orchardcdnapi.herokuapp.com/message/add", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({
+                first_name: firstName,
+                last_name: lastName,
+                email,
+                phone,
+                message
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 200) {
+                setAlert("Message Sent!")
+                setFirstName("")
+                setLastName("")
+                setEmail("")
+                setPhone("")
+                setMessage("")
+            }
+            else {
+                setAlert("An unexpected error occured... Please try again later.")
+                setError(true)
+                console.log("Error while posting message: ", data.message)
+            }
+            setLoading(false)
+        })
+        .catch(error => {
+            setAlert("An unexpected error occured... Please try again later.")
+            setError(true)
+            console.log("Error while posting message: ", error)
+            setLoading(false)
+        })
     }
 
     return (
@@ -54,7 +98,11 @@ export default function ContactForm(props) {
                 onChange={event => setMessage(event.target.value)}
                 required
             ></textarea>
-            <button type="submit">Send Message</button>
+            <button type="submit" disabled={loading}>Send Message</button>
+            <div className="alert-wrapper">
+                { loading ? <Loading /> : null }
+                <p style={ error ? { color: "red" } : {} }>{alert}</p>
+            </div>
         </form>
     )
 }
