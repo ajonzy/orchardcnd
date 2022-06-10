@@ -12,14 +12,16 @@ export default function Register(props) {
             <div className="class-info-wrapper" key={`classInfo-${classData.id}`}>
                 <div className="class-info">
                     <p className='info'>{classData.month} {classData.start_date}{classData.year != currentYear ? `, ${classData.year}` : null}</p>
-                    <p className={`availabliity ${30 - classData.signups > 0 ? "open" : "full"}`}>{30 - classData.signups > 0 ? "Open" : "Full"}</p>
+                    <p className={`availabliity ${classData.registrations_count < 30 ? "open" : "full"}`}>{classData.registrations_count < 30 ? "Open" : "Full"}</p>
                 </div>
-                <div className="subsection">
-                    <div className="times">
+                <div className="class-subsection-wrapper">
+                    <div className="class-times">
                         <p>Lectures: {classData.lecture_time}</p>
                         <p>Clinicals: {classData.clinical_time}</p>
                     </div>
-                    <RegisterModal class={classData} />
+                    <div className="register-button-wrapper">
+                        { classData.registrations_count < 30 ? <RegisterModal class={classData} getKeys={props.getKeys} /> : null }
+                    </div>
                 </div>
             </div>
         ))

@@ -12,6 +12,9 @@ export default function RegisterModal(props) {
     const [paymentData, setPaymentData] = useState({})
 
     const modalStyles = {
+        overlay: {
+            zIndex: "10000"
+        },
         content: {
             top: '50%',
             left: '50%',
@@ -19,6 +22,11 @@ export default function RegisterModal(props) {
             bottom: 'auto',
             marginRight: '-50%',
             transform: 'translate(-50%, -50%)',
+            height: "80%",
+            width: "557px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center"
         }
     }
       
@@ -50,7 +58,7 @@ export default function RegisterModal(props) {
     const renderForm = () => {
         switch (modalSection) {
             case "studentForm": return <RegisterForm handleSubmit={handleStudentDataSubmit} />
-            case "paymentForm": return <PaymentForm handleSubmit={handlePaymentDataSubmit} />
+            case "paymentForm": return <PaymentForm handleSubmit={handlePaymentDataSubmit} getKeys={props.getKeys} />
             case "confirmForm": return <ReviewForm handleSubmit={handleConfirmSubmit} class={props.class} studentData={studentData} paymentData={paymentData} />
             case "successForm": return (
                 <div className='success-wrapper'>

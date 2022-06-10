@@ -19,6 +19,7 @@ export default function RegisterForm(props) {
 
     return (
         <form className='register-form' onSubmit={handleSubmit}>
+            <h2>Registration Info</h2>
             <div className="inputs-wrapper">
                 <input 
                     type="text" 

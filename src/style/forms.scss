@@ -1,7 +1,11 @@
-.contact-form, .register-form {
+.contact-form, .register-form, .review-form {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    h2 {
+        font-size: 2rem;
+    }
 
     .inputs-wrapper {
         display: grid;
@@ -55,5 +59,32 @@
         height: 90px;
         color: $green;
         font-weight: bold;
+    }
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+.review-form {
+    .review-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        h4 {
+            margin: 5px;
+            font-size: 1.2rem;
+        }
+    }
+
+    button {
+        margin-top: 40px;
     }
 }

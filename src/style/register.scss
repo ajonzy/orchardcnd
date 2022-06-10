@@ -6,10 +6,12 @@
 
         .class-info-wrapper {
             box-shadow: 0px 8px 4px -4px rgba(0,0,0,.3);
-            padding: 20px 0px;
+            padding: 20px 30px;
+            width: 932px;
+    
 
             p {
-                margin: 0px 30px;
+                margin: 0;
 
                 &.open {
                     color: $green;
@@ -24,8 +26,17 @@
             .class-info {
                 display: flex;
                 justify-content: space-between;
-                width: 932px;
                 font-weight: bold;
+            }
+
+            .class-subsection-wrapper {
+                display: flex;
+                justify-content: space-between;
+
+                .register-button-wrapper {
+                    display: flex;
+                    align-items: flex-end;
+                }
             }
         }
     }

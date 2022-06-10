@@ -8,7 +8,6 @@ import {
     CreditCardSubmitButton
 } from 'react-square-payment-form'
 import 'react-square-payment-form/lib/default.css'
-import env from "react-dotenv"
 
 export default function (props) {
     const [errors, setErrors] = useState([])
@@ -46,35 +45,38 @@ export default function (props) {
     }
 
     return (
-        <SquarePaymentForm
-            sandbox={true}
-            applicationId={env.SQUARE_APPLICATION_ID}
-            locationId={env.SQUARE_LOCATION_ID}
-            cardNonceResponseReceived={cardNonceResponseReceived}
-            createVerificationDetails={createVerificationDetails}
-        >
-            <fieldset className="sq-fieldset">
-                <CreditCardNumberInput />
-                <div className="sq-form-third">
-                    <CreditCardExpirationDateInput />
+        <div className="payment-form">
+            <h2>Payment Info</h2>
+            <SquarePaymentForm
+                sandbox={true}
+                applicationId={props.getKeys().SQUARE_APPLICATION_ID}
+                locationId={props.getKeys().SQUARE_LOCATION_ID}
+                cardNonceResponseReceived={cardNonceResponseReceived}
+                createVerificationDetails={createVerificationDetails}
+            >
+                <fieldset className="sq-fieldset">
+                    <CreditCardNumberInput />
+                    <div className="sq-form-third">
+                        <CreditCardExpirationDateInput />
+                    </div>
+
+                    <div className="sq-form-third">
+                        <CreditCardPostalCodeInput />
+                    </div>
+
+                    <div className="sq-form-third">
+                        <CreditCardCVVInput />
+                    </div>
+                </fieldset>
+
+                <CreditCardSubmitButton>
+                    Review and Checkout
+                </CreditCardSubmitButton>
+
+                <div className="errors-wrapper">
+                    {errors.map(error => <p style={{ color: "red" }}>{error}</p>)}
                 </div>
-
-                <div className="sq-form-third">
-                    <CreditCardPostalCodeInput />
-                </div>
-
-                <div className="sq-form-third">
-                    <CreditCardCVVInput />
-                </div>
-            </fieldset>
-
-            <CreditCardSubmitButton>
-                Review and Checkout
-            </CreditCardSubmitButton>
-
-            <div className="errors-wrapper">
-                {errors.map(error => <p style={{ color: "red" }}>{error}</p>)}
-            </div>
-        </SquarePaymentForm>
+            </SquarePaymentForm>
+        </div>
     )
 }

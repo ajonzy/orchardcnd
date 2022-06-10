@@ -20,6 +20,10 @@ export default class App extends Component {
         testimonials: []
       }
     }
+
+    this.apiKeys = {}
+
+    this.getKeys = this.getKeys.bind(this)
   }
 
   componentDidMount() {
@@ -27,6 +31,15 @@ export default class App extends Component {
     .then(response => response.json())
     .then(data => this.setState({ data }))
     .catch(error => console.log("Error contacting API: ", error))
+
+    fetch("https://orchardcdnapi.herokuapp.com/data/keys")
+    .then(response => response.json())
+    .then(data => this.apiKeys = data)
+    .catch(error => console.log("Error contacting API: ", error))
+  }
+
+  getKeys() {
+    return this.apiKeys
   }
 
   render() {
@@ -43,7 +56,7 @@ export default class App extends Component {
         >
           <Route exact path="/" render={(...props) => <Home {...props} classesData={this.state.data.events} testimonialsData={this.state.data.testimonials} />} />
           <Route path="/about" component={About} />
-          <Route path="/register" render={(...props) => <Register {...props} classesData={this.state.data.events} />} />
+          <Route path="/register" render={(...props) => <Register {...props} classesData={this.state.data.events} getKeys={this.getKeys} />} />
           <Route path="/contact" component={Contact} />
         </AnimatedSwitch>
         <Footer />

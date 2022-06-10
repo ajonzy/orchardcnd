@@ -32,7 +32,7 @@ export default function Home(props) {
             <div className="class-info-wrapper" key={`classInfo-${classData.id}`}>
                 <div className="class-info">
                     <p className='info'>{classData.month} {classData.start_date}{classData.year != currentYear ? `, ${classData.year}` : null}</p>
-                    <p className={`availabliity ${30 - classData.signups > 0 ? "open" : "full"}`}>{30 - classData.signups > 0 ? "Open" : "Full"}</p>
+                    <p className={`availabliity ${classData.registrations_count < 30 ? "open" : "full"}`}>{classData.registrations_count < 30 ? "Open" : "Full"}</p>
                 </div>
                 <p>Lectures: {classData.lecture_time}</p>
                 <p>Clinicals: {classData.clinical_time}</p>

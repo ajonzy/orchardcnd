@@ -11,6 +11,14 @@ a {
     text-decoration: none;
 }
 
+button {
+    cursor: pointer;
+
+    &:disabled {
+        opacity: .7;
+    }
+}
+
 .app {
     min-height: 100vh;
     display: flex;
