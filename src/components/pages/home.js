@@ -42,7 +42,7 @@ export default function Home(props) {
     }
 
     const renderTestimonials = () => {
-        return Object.keys(props.classesData).length > 0
+        return Object.keys(props.testimonialsData).length > 0
         ? <div className="testimonials-blocks-frame" style={testimonialsFrameStyles}>
             {props.testimonialsData.map(testimonialData => (
                 <div className="testimonial-block" key={`testimonialInfo-${testimonialData.id}`}>

@@ -4,11 +4,13 @@ import { faBuilding, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-ico
 
 import ContactForm from '../forms/contact-form'
 
+import Lab from "../../../static/assets/images/lab-clipart.jpg"
+
 export default function Contact(props) {
     return (
         <div className='contact-page-wrapper page-wrapper'>
             <div className="contact-info-wrapper section-wrapper">
-                <h2>We Want To Hear From You!</h2>
+                <h2 className='page-header'>We Want To Hear From You!</h2>
                 <div className="contact-info-block">
                     <div className='icon'><FontAwesomeIcon icon={faPhone} /></div>
                     <h4>(801) 358-2102</h4>
@@ -28,6 +30,7 @@ export default function Contact(props) {
             <div className="contact-form-wrapper">
                 <ContactForm/>
             </div>
+            <img src={Lab} alt="" />
         </div>
     )
 }

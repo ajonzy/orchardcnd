@@ -1,13 +1,13 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Student from "../../../static/assets/images/student-generic.png"
-import Lab from "../../../static/assets/images/lab-clipart.jpg"
 
 export default function About(props) {
     return (
         <div className='about-page-wrapper page-wrapper'>
             <div className="our-mission-wrapper section-wrapper">
-                <h2>Our Mission</h2>
+                <h2 className='page-header'>Our Mission</h2>
                 <p>Orchard CNA Training Centers welcomes applications from all qualified individuals. Equal educational opportunities are offered to all who meet entrance requirements, without regard to race, gender, ethnicity, creed, marital status or age.</p>
             </div>
             <div className="class-requirements-wrapper section-wrapper">
@@ -47,7 +47,9 @@ export default function About(props) {
                     <p>ORCHARD CNA TRAINING CENTERS MUST FORWARD IDENTIFYING INFORMATION TO THE STATE OF Utah TO VERIFY YOUR ELIGIBILITY TO COMPLETE THE CERTIFICATION EXAMINATIONS.</p>
                     <p>SUCCESSFUL COMPLETION OF THIS NURSING ASSISTANT TRAINING PROGRAM WILL ALLOW YOU TO SIT FOR THE STATE OF Utah ADMINISTERED COMPETENCY EXAMINATION IN ORDER TO BECOME A CERTIFIED NURSE ASSISTANT AS DEFINED BY STATE AND FEDERAL LAW.</p>
                 </div>
-                <img src={Lab} alt="" />
+            </div>
+            <div className="register-now-wrapper section-wrapper button-wrapper">
+                <Link to="/register">Register Now</Link>
             </div>
         </div>
     )

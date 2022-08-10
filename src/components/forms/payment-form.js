@@ -18,6 +18,9 @@ export default function (props) {
             setErrors(errors.map(error => error.message))
             return
         }
+        else {
+            setErrors([])
+        }
     
         props.handleSubmit({
             nonce,
@@ -69,9 +72,13 @@ export default function (props) {
                     </div>
                 </fieldset>
 
-                <CreditCardSubmitButton>
-                    Review and Checkout
-                </CreditCardSubmitButton>
+                <div className="buttons-wrapper">
+                    <button type="button" className="sq-creditcard" onClick={props.handleBack}>Back</button>
+
+                    <CreditCardSubmitButton>
+                        Review and Checkout
+                    </CreditCardSubmitButton>
+                </div>
 
                 <div className="errors-wrapper">
                     {errors.map(error => <p style={{ color: "red" }}>{error}</p>)}

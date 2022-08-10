@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { AsYouType } from 'libphonenumber-js'
 
 export default function RegisterForm(props) {
     const [firstName, setFirstName] = useState("")
@@ -15,6 +16,13 @@ export default function RegisterForm(props) {
             email,
             phone
         })
+    }
+
+    const handlePhoneChange = event => {
+        let value = event.target.value
+        if (value.search(/\(\d{3}$/) !== -1) value = value.slice(0, -1).replace("(", "")
+
+        setPhone(new AsYouType("US").input(value))
     }
 
     return (
@@ -50,7 +58,8 @@ export default function RegisterForm(props) {
                     name="phone"
                     placeholder="Phone"
                     value={phone}
-                    onChange={event => setPhone(event.target.value)}
+                    onChange={handlePhoneChange}
+                    pattern=".*\(?(\d{3})\)?[-\.\s]?(\d{3})[-\.\s]?(\d{4})"
                     required
                 />
             </div>

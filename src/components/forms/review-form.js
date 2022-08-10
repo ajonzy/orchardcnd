@@ -88,7 +88,10 @@ export default function ReviewForm(props) {
                 <h4>Amount: ${props.paymentData.amount.toFixed(2)}</h4>
                 <h4>Card: {props.paymentData.buyerVerificationToken.card_brand} ending in {props.paymentData.buyerVerificationToken.last_4}</h4>
             </div>
-            <button type="submit" disabled={loading || errorAfterPayment}>Confirm and Register</button>
+            <div className="buttons-wrapper">
+                <button type="button" onClick={props.handleBack}>Back</button>
+                <button type="submit" disabled={loading || errorAfterPayment}>Confirm and Register</button>
+            </div>
             <div className="alert-wrapper">
                 { loading ? <Loading /> : null }
                 <p style={ error ? { color: "red" } : {} }>{alert}</p>

@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 import RegisterModal from '../modals/register-modal'
 
 import Loading from '../utils/loading'
@@ -31,10 +33,14 @@ export default function Register(props) {
     return (
         <div className='register-page-wrapper page-wrapper'>
             <div className="upcoming-classes-wrapper section-wrapper">
-                <h2>Upcoming Classes</h2>
+                <h2 className='page-header'>Upcoming Classes</h2>
                 <p>All classes are 104 hours long</p>
                 <p>A current TB test, covid vaccination card and a set of scrubs will be required for clinicals</p>
+                <h4>Course Cost - $475</h4>
                 {renderClasses()}
+            </div>
+            <div className="contact-us-wrapper section-wrapper button-wrapper">
+                <Link to="/contact">Questions or Concerns?<br/>Contact Us</Link>
             </div>
         </div>
     )

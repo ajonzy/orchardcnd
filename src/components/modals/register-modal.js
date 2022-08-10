@@ -7,9 +7,20 @@ import ReviewForm from '../forms/review-form';
 
 export default function RegisterModal(props) {
     const [modalIsOpen, setIsOpen] = useState(false)
-    const [modalSection, setModalSection] = useState("studentForm")
-    const [studentData, setStudentData] = useState({})
-    const [paymentData, setPaymentData] = useState({})
+    const [modalSection, setModalSection] = useState(0)
+    const [studentData, setStudentData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: ""
+    })
+    const [paymentData, setPaymentData] = useState({
+        amount: 0,
+        buyerVerificationToken: {
+            card_brand: "",
+            last_4: ""
+        }
+    })
 
     const modalStyles = {
         overlay: {
@@ -37,36 +48,43 @@ export default function RegisterModal(props) {
     }
 
     function closeModal() {
-        setModalSection("studentForm")
-        setStudentData({})
-        setPaymentData({})
+        setModalSection(0)
+        setStudentData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: ""
+        })
+        setPaymentData({
+            amount: 0,
+            buyerVerificationToken: {
+                card_brand: "",
+                last_4: ""
+            }
+        })
         setIsOpen(false);
     }
 
     const handleStudentDataSubmit = data => {
         setStudentData(data)
-        setModalSection("paymentForm")
+        setModalSection(1)
     }
 
     const handlePaymentDataSubmit = data => {
         setPaymentData(data)
-        setModalSection("confirmForm")
+        setModalSection(2)
     }
 
-    const handleConfirmSubmit = () => setModalSection("successForm")
+    const handleConfirmSubmit = () => setModalSection(3)
 
-    const renderForm = () => {
-        switch (modalSection) {
-            case "studentForm": return <RegisterForm handleSubmit={handleStudentDataSubmit} />
-            case "paymentForm": return <PaymentForm handleSubmit={handlePaymentDataSubmit} getKeys={props.getKeys} />
-            case "confirmForm": return <ReviewForm handleSubmit={handleConfirmSubmit} class={props.class} studentData={studentData} paymentData={paymentData} />
-            case "successForm": return (
-                <div className='success-wrapper'>
-                    <h3>Registration Success!</h3>
-                    <p>You are registered for the {props.class.month} {props.class.start_date}, {props.class.year} class. You may now close this window.</p>
-                    <button onClick={closeModal}>Close</button>
-                </div>
-            )
+    const handleBack = () => setModalSection(modalSection - 1)    
+
+    const frameStyles = () => {
+        switch(modalSection) {
+            case 0: return "translateX(0%)"
+            case 1: return "translateX(calc(-25% - 2px))"
+            case 2: return "translateX(calc(-50% - 2px))"
+            case 3: return "translateX(calc(-75% - 2px))"
         }
     }
 
@@ -79,7 +97,18 @@ export default function RegisterModal(props) {
                 style={modalStyles}
                 contentLabel="Example Modal"
             >
-                {renderForm()}
+                <div className="modal-forms-wrapper">
+                    <div className="modal-forms-frame" style={{ transform: frameStyles() }}>
+                        <RegisterForm handleSubmit={handleStudentDataSubmit} />
+                        <PaymentForm handleSubmit={handlePaymentDataSubmit} handleBack={handleBack} getKeys={props.getKeys} />
+                        <ReviewForm handleSubmit={handleConfirmSubmit} handleBack={handleBack} class={props.class} studentData={studentData} paymentData={paymentData} />
+                        <div className='success-wrapper'>
+                            <h3>Registration Success!</h3>
+                            <p>You are registered for the {props.class.month} {props.class.start_date}, {props.class.year} class. You may now close this window.</p>
+                            <button onClick={closeModal}>Close</button>
+                        </div>
+                    </div>
+                </div>
             </Modal>
         </div>
     )
